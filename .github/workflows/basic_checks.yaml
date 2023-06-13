@@ -30,12 +30,18 @@ jobs:
           restore-keys: ${{ env.cache-version }}-${{ runner.os }}-r-
 
       # This lets us augment with additional dependencies    
+        
+      - uses: actions/checkout@v3
+      - uses: actions/setup-python@v4
+        with:
+          python-version: '3.10' 
+      
       - name: Install system dependencies
         if: runner.os == 'Linux'
         env:
           RHUB_PLATFORM: linux-x86_64-ubuntu-gcc
         run: |
-          sudo apt-get install python2
+        # sudo apt-get install python2
           python2 --version
           python --version
           Rscript -e "remotes::install_github('r-hub/sysreqs')"
