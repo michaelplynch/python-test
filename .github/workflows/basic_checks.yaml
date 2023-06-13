@@ -31,7 +31,7 @@ jobs:
 
       # This lets us augment with additional dependencies
       - name: Setup Python
-      uses: actions/setup-python@v3.1.4
+        uses: actions/setup-python@v3.1.4
       
       - name: Install system dependencies
         if: runner.os == 'Linux'
