@@ -30,6 +30,9 @@ jobs:
           restore-keys: ${{ env.cache-version }}-${{ runner.os }}-r-
 
       # This lets us augment with additional dependencies
+      - name: Setup Python
+      uses: actions/setup-python@v3.1.4
+      
       - name: Install system dependencies
         if: runner.os == 'Linux'
         env:
