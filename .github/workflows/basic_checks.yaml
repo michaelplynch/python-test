@@ -31,10 +31,11 @@ jobs:
 
       # This lets us augment with additional dependencies
       - name: Install Python
-        uses: actions/setup-python@v4
+      - uses: actions/setup-python@v4
         with:
-          python-version: '3.10'
-        run: python -h
+          python-version: '3.10' 
+      - run: python -h
+
     
       - name: Install system dependencies
         if: runner.os == 'Linux'
