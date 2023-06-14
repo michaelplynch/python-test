@@ -14,6 +14,16 @@ jobs:
       GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
     steps:
       - uses: actions/checkout@v2
+      
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: "3.10"
+          
+      - name: Test python
+        run: |
+          python3 -h
+          python -h
           
       - name: Query dependencies and update old packages
         run: |
@@ -29,11 +39,6 @@ jobs:
           key: ${{ env.cache-version }}-${{ runner.os }}-r-${{ hashFiles('.github/depends.Rds') }}
           restore-keys: ${{ env.cache-version }}-${{ runner.os }}-r-
 
-      - name: Install python
-        uses: actions/setup-python@v4
-        with:
-          python-version: '3.10'
-        run: python -h
     
       # This lets us augment with additional dependencies 
       - name: Install system dependencies
@@ -41,8 +46,6 @@ jobs:
         env:
           RHUB_PLATFORM: linux-x86_64-ubuntu-gcc
         run: |
-          python3 -h
-          python -h
           sudo apt-get update
           sudo apt-get install -y python-is-python3
           Rscript -e "remotes::install_github('r-hub/sysreqs')"
