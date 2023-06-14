@@ -31,7 +31,7 @@ jobs:
         shell: Rscript {0}
         run: |
           python_packages <- 
-            c("numpy", "any-other-python-packages-you-want-go-here")
+            c("numpy")
           
           library(reticulate)
           virtualenv_create("r-reticulate", Sys.which("python"))
