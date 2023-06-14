@@ -29,6 +29,12 @@ jobs:
           key: ${{ env.cache-version }}-${{ runner.os }}-r-${{ hashFiles('.github/depends.Rds') }}
           restore-keys: ${{ env.cache-version }}-${{ runner.os }}-r-
 
+      - name: Install python
+      - uses: actions/checkout@v3
+      - uses: actions/setup-python@v4
+        with:
+          python-version: '3.10'
+    
       # This lets us augment with additional dependencies 
       - name: Install system dependencies
         if: runner.os == 'Linux'
@@ -36,6 +42,7 @@ jobs:
           RHUB_PLATFORM: linux-x86_64-ubuntu-gcc
         run: |
           python3 -h
+          python -h
           sudo apt-get update
           sudo apt-get install -y python-is-python3
           Rscript -e "remotes::install_github('r-hub/sysreqs')"
